@@ -33,7 +33,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 const Tab = createBottomTabNavigator();
 
 export default function UserStack({ route, navigation }) {
-  // Sign-out logic using Supabase
+
   const handleSignOut = async () => {
     try {
       const { error } = await supabase.auth.signOut();
@@ -85,7 +85,7 @@ export default function UserStack({ route, navigation }) {
       <Tab.Screen
         name="Spotlight"
         component={SpotlightScreen}
-        options={screenOptions}
+        options={{screenOptions, headerShown: false}}
       />
     </Tab.Navigator>
   );
