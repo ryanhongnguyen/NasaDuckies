@@ -55,21 +55,24 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     padding: 20,
+    marginTop: 20,
   },
   profileSection: {
     alignItems: 'center',
     marginBottom: 20,
   },
   profileImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 150,
+    height: 150,
+    borderRadius: 150,
+    marginBottom: 20,
   },
   profileName: {
     fontSize: 24,
     fontWeight: 'bold',
   },
   profilePronoun: {
+    marginTop: 10,
     fontSize: 16,
     color: '#666',
   },

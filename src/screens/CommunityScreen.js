@@ -11,20 +11,20 @@ export default function InsightsCarousel() {
       title: 'Best Growing Practice for Corn',
       image: require('../../assets/cornPhoto.png'),
       description: [
-        'Grow in full sun',
-        'Well-drained soil pH 6.0 - 6.8',
-        'Plant early Spring for high yield',
-        'Use a water-soluble plant food'
+        '1. Grow in full sun',
+        '2. Have well-drained soil pH 6.0 - 6.8',
+        '3. Plant early Spring for high crop yield',
+        '4. Use a water-soluble plant food'
       ]
     },
     {
       title: 'Strategies to Adopt for Climate Change',
       image: require('../../assets/climate.png'),
       description: [
-        'Climate data analysis',
-        'Improved irrigation systems',
-        'Extreme weather event alert',
-        'Crop diversification'
+        '1. Climate data analysis',
+        '2. Improved irrigation systems',
+        '3. Extreme weather event alert',
+        '4. Crop diversification'
       ]
     },
     {
@@ -87,12 +87,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     paddingVertical: 50,
-    marginTop: 30,
   },
   heading: {
     fontSize: 25,
     fontWeight: '600',
     textAlign: 'center',
+    marginTop: 40,
     marginBottom: 20,
   },
   card: {
