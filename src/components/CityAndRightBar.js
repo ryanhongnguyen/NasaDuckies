@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { colors } from "../../assets/themes/colors";
 
-export default function CityAndRightBar({ city, isSatellite, setIsSatellite }) {
+export default function CityAndRightBar({ city, isSatellite, setIsSatellite, handleRecenter }) {
   return (
     <>
       <View style={styles.cityContainer}>
@@ -18,7 +18,7 @@ export default function CityAndRightBar({ city, isSatellite, setIsSatellite }) {
       </View>
 
       <View style={styles.barContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleRecenter}>
           <View style={styles.circleContainerVertical}>
             <Image 
               source={{ uri: 'https://i.postimg.cc/RFpH5K01/Heat-Map-Icon.png' }} 
@@ -38,14 +38,6 @@ export default function CityAndRightBar({ city, isSatellite, setIsSatellite }) {
           <View style={styles.circleContainerVertical}>
             <Image 
               source={{ uri: 'https://i.postimg.cc/ZR5dMVJK/Memories-Icon.png' }} 
-              style={styles.circleImage} 
-            />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <View style={styles.circleContainerVertical}>
-            <Image 
-              source={{ uri: 'https://i.postimg.cc/bv8bQqMn/Arrow-Icon.png' }} 
               style={styles.circleImage} 
             />
           </View>

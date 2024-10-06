@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import MapView, { Marker } from "react-native-maps";
-import { StyleSheet, View, TouchableOpacity, ScrollView, Image, Text } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as Location from "expo-location";
@@ -18,7 +18,6 @@ export default function MapScreen() {
   const [location, setLocation] = useState(null);
   const [currentRegion, setCurrentRegion] = useState(null);
   const [city, setCity] = useState('');
-  const [places, setPlaces] = useState([]);
   const mapRef = useRef(null);
   const [isSatellite, setIsSatellite] = useState(false);
 
@@ -62,25 +61,6 @@ export default function MapScreen() {
     setCity(cityName);
   };
 
-  const fetchNearbyPlaces = async (keyword) => {
-    const radius = 3 * 1609.34; // 3 miles in meters
-    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.coords.latitude},${location.coords.longitude}&radius=${radius}&keyword=${keyword}&key=${apiKey}`;
-    try {
-      const response = await axios.get(url);
-      setPlaces(response.data.results);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleShowPlaces = () => {
-    if (!location) {
-      console.error("Location not available");
-      return;
-    }
-    fetchNearbyPlaces("shop");
-  };
-
   const handleRecenter = () => {
     if (location && mapRef.current) {
       mapRef.current.animateToRegion(currentRegion, 1000);
@@ -105,26 +85,14 @@ export default function MapScreen() {
               }}
             >
               <Image
-                source={require("../../assets/Me Bitmoji Icon.png")}
+                source={require("../../assets/corn.png")}
                 style={{ width: 100, height: 100 }}
               />
             </Marker>
           )}
-          {places.map((place, index) => (
-            <Marker
-              key={index}
-              coordinate={{
-                latitude: place.geometry.location.lat,
-                longitude: place.geometry.location.lng,
-              }}
-              onPress={() => console.log(`Selected place: ${place.name}`)}
-            >
-              <Image style={{ height: 40, width: 40 }} source={require("../../assets/marker.png")} />
-            </Marker>
-          ))}
         </MapView>
 
-        <CityAndRightBar city={city} isSatellite={isSatellite} setIsSatellite={setIsSatellite} />
+        <CityAndRightBar city={city} isSatellite={isSatellite} setIsSatellite={setIsSatellite} handleRecenter={handleRecenter} />
 
         <View style={styles.mapFooter}>
           <View style={styles.locationContainer}>
@@ -133,13 +101,6 @@ export default function MapScreen() {
               onPress={handleRecenter}
             >
               <Ionicons name="navigate" size={15} color="black" />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.showPlacesButton}
-              onPress={handleShowPlaces}
-            >
-              <Text style={{ color: 'white', fontWeight: 'bold' }}>Show Farming Shops</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -170,11 +131,6 @@ const styles = StyleSheet.create({
   },
   userLocation: {
     backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 10,
-  },
-  showPlacesButton: {
-    backgroundColor: 'green',
     borderRadius: 20,
     padding: 10,
   },
