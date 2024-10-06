@@ -21,6 +21,7 @@ export default function MapScreen() {
   const mapRef = useRef(null);
   const [isSatellite, setIsSatellite] = useState(false);
   const [farmMarkers, setFarmMarkers] = useState([]);
+  const [neighborMarkers, setNeighborMarkers] = useState([]);
 
   useEffect(() => {
     const getLocation = async () => {
@@ -38,7 +39,8 @@ export default function MapScreen() {
           latitudeDelta: 0.0222,
           longitudeDelta: 0.0121,
         });
-        populateFarmMarkers(loc.coords.latitude+0.003, loc.coords.longitude);
+        populateFarmMarkers(loc.coords.latitude + 0.003, loc.coords.longitude);
+        populateNeighborFarmMarkers(loc.coords.latitude - 0.01, loc.coords.longitude - 0.01);
       } catch (error) {
         console.error(error.message);
       }
@@ -69,11 +71,11 @@ export default function MapScreen() {
     }
   };
 
-  // Function to populate farm markers in a square grid
+
   const populateFarmMarkers = (latitude, longitude) => {
     const markers = [];
-    const distance = 0.001; // Distance between markers (adjust for larger/smaller grid)
-    const gridSize = 5; // Grid size (5x5 for example)
+    const distance = 0.001;
+    const gridSize = 5;
     
     for (let i = -gridSize / 2; i <= gridSize / 2; i++) {
       for (let j = -gridSize / 2; j <= gridSize / 2; j++) {
@@ -87,6 +89,23 @@ export default function MapScreen() {
     setFarmMarkers(markers);
   };
 
+  const populateNeighborFarmMarkers = (latitude, longitude) => {
+    const markers = [];
+    const distance = 0.001;
+    const gridSize = 5;
+    
+    for (let i = -gridSize / 2; i <= gridSize / 2; i++) {
+      for (let j = -gridSize / 2; j <= gridSize / 2; j++) {
+        markers.push({
+          latitude: latitude + i * distance,
+          longitude: longitude + j * distance,
+        });
+      }
+    }
+
+    setNeighborMarkers(markers);
+  };
+
   return (
     <BottomSheetModalProvider>
       <View style={[styles.container, { marginBottom: tabBarHeight }]}>
@@ -98,19 +117,34 @@ export default function MapScreen() {
           mapType={isSatellite ? 'hybrid' : 'standard'}
         >
           {location && (
-            <Marker
-              coordinate={{
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
-              }}
-              zIndex={999}
-            >
-              <Image
-                source={require("../../assets/man.png")}
-                style={{ width: 100, height: 100 }}
-                resizeMode="contain"
-              />
-            </Marker>
+            <>
+              <Marker
+                coordinate={{
+                  latitude: location.coords.latitude,
+                  longitude: location.coords.longitude,
+                }}
+                zIndex={999}
+              >
+                <Image
+                  source={require("../../assets/man.png")}
+                  style={{ width: 100, height: 100 }}
+                  resizeMode="contain"
+                />
+              </Marker>
+              <Marker
+                coordinate={{
+                  latitude: location.coords.latitude - 0.013,
+                  longitude: location.coords.longitude - 0.01,
+                }}
+                zIndex={999}
+              >
+                <Image
+                  source={require("../../assets/neighbor.png")}
+                  style={{ width: 100, height: 100 }}
+                  resizeMode="contain"
+                />
+              </Marker>
+            </>
           )}
 
           {/* Render farm markers */}
@@ -118,6 +152,16 @@ export default function MapScreen() {
             <Marker key={index} coordinate={marker}>
               <Image
                 source={require("../../assets/corn.png")}
+                style={{ width: 50, height: 50 }}
+              />
+            </Marker>
+          ))}
+
+          {/* Render neighbor farm markers */}
+          {neighborMarkers.map((marker, index) => (
+            <Marker key={`neighbor-${index}`} coordinate={marker}>
+              <Image
+                source={require("../../assets/pineapple.png")}
                 style={{ width: 50, height: 50 }}
               />
             </Marker>
