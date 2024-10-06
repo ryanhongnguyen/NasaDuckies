@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import MapView, { Marker } from "react-native-maps";
-import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as Location from "expo-location";
@@ -20,6 +20,7 @@ export default function MapScreen() {
   const [city, setCity] = useState('');
   const mapRef = useRef(null);
   const [isSatellite, setIsSatellite] = useState(false);
+  const [farmMarkers, setFarmMarkers] = useState([]);
 
   useEffect(() => {
     const getLocation = async () => {
@@ -37,6 +38,7 @@ export default function MapScreen() {
           latitudeDelta: 0.0222,
           longitudeDelta: 0.0121,
         });
+        populateFarmMarkers(loc.coords.latitude+0.003, loc.coords.longitude);
       } catch (error) {
         console.error(error.message);
       }
@@ -67,6 +69,24 @@ export default function MapScreen() {
     }
   };
 
+  // Function to populate farm markers in a square grid
+  const populateFarmMarkers = (latitude, longitude) => {
+    const markers = [];
+    const distance = 0.001; // Distance between markers (adjust for larger/smaller grid)
+    const gridSize = 5; // Grid size (5x5 for example)
+    
+    for (let i = -gridSize / 2; i <= gridSize / 2; i++) {
+      for (let j = -gridSize / 2; j <= gridSize / 2; j++) {
+        markers.push({
+          latitude: latitude + i * distance,
+          longitude: longitude + j * distance,
+        });
+      }
+    }
+
+    setFarmMarkers(markers);
+  };
+
   return (
     <BottomSheetModalProvider>
       <View style={[styles.container, { marginBottom: tabBarHeight }]}>
@@ -83,13 +103,25 @@ export default function MapScreen() {
                 latitude: location.coords.latitude,
                 longitude: location.coords.longitude,
               }}
+              zIndex={999}
             >
               <Image
-                source={require("../../assets/corn.png")}
+                source={require("../../assets/man.png")}
                 style={{ width: 100, height: 100 }}
+                resizeMode="contain"
               />
             </Marker>
           )}
+
+          {/* Render farm markers */}
+          {farmMarkers.map((marker, index) => (
+            <Marker key={index} coordinate={marker}>
+              <Image
+                source={require("../../assets/corn.png")}
+                style={{ width: 50, height: 50 }}
+              />
+            </Marker>
+          ))}
         </MapView>
 
         <CityAndRightBar city={city} isSatellite={isSatellite} setIsSatellite={setIsSatellite} handleRecenter={handleRecenter} />
