@@ -6,11 +6,10 @@ const WaterScreen = () => {
   const [soilMoistureLevels, setSoilMoistureLevels] = useState([]);
   const [optimalLevels, setOptimalLevels] = useState([]);
   const [dates, setDates] = useState([]);
-  const [waterRequired, setWaterRequired] = useState(59); // Water level in percentage
+  const [waterRequired, setWaterRequired] = useState(60); // Water level in percentage
   const [wateringDay, setWateringDay] = useState(null);
   const [ndviValue, setNdviValue] = useState(75); // Hard-coded NDVI value at 75%
 
-  // Get the screen width for responsive chart sizing
   const screenWidth = Dimensions.get('window').width;
 
   // Simulate fetching data for the last 7 days
@@ -20,40 +19,25 @@ const WaterScreen = () => {
     // const optimalLevelData = Array(soilMoistureData.length).fill(0.4);
     // console.log(optimalLevelData);
 
-    // Validate the data to ensure it's finite and within acceptable range
-    const validSoilMoistureData = soilMoistureData.map((value) =>
-      typeof value === 'number' && isFinite(value) ? value : 0
-    );
-
-    const validOptimalLevels = optimalLevelData.map((value) =>
-      typeof value === 'number' && isFinite(value) ? value : 0
-    );
-
-    // Update the state only with valid data
-    setSoilMoistureLevels(validSoilMoistureData);
-    setOptimalLevels(validOptimalLevels);
+    // setSoilMoistureLevels(validSoilMoistureData);
+    // setOptimalLevels(validOptimalLevels);
     setDates(dateLabels);
 
-    // Simulate fetching for water tank and schedule
-    const weeklyWaterDay = 2; // Example: Tuesday
+    const weeklyWaterDay = 2;
     setWateringDay(weeklyWaterDay);
   }, []);
 
-  const today = 'Tuesday'; // Hardcoding Tuesday as the current day
+  const today = 'Tuesday';
 
   return (
     <SafeAreaView>
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>Water Schedule</Text>
 
-        {/* Water Scale */}
         <View style={styles.waterTankContainer}>
           <View style={styles.waterTank}>
-            {/* Green layer for the difference */}
             <View style={styles.normalWaterLayer} />
-            {/* Water fill */}
             <View style={[styles.waterFill, { height: `${waterRequired}%` }]} />
-            {/* Black line indicating the 75% watering mark */}
             <View style={styles.blackLine} />
           </View>
           <Text style={styles.waterPercentage}>
@@ -61,7 +45,6 @@ const WaterScreen = () => {
           </Text>
         </View>
 
-        {/* Calendar Section - Displaying all days */}
         <Text style={styles.calendarTitle}>7-Day Watering Schedule</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <View style={styles.calendarGrid}>
@@ -78,7 +61,6 @@ const WaterScreen = () => {
           </View>
         </ScrollView>
 
-        {/* Centered Soil Moisture Graph Image */}
         <View style={styles.graphContainer}>
           <Text style={styles.title}>Soil Moisture Levels (Last 7 Days)</Text>
           <Image
@@ -104,7 +86,6 @@ const WaterScreen = () => {
   );
 };
 
-// Define the styles
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -151,16 +132,16 @@ const styles = StyleSheet.create({
   normalWaterLayer: {
     position: 'absolute',
     width: '100%',
-    height: '75%', // Normal watering ratio (mid-point)
-    backgroundColor: 'rgba(0, 255, 0, 0.2)', // Light green background to show the normal watering difference
+    height: '75%',
+    backgroundColor: 'rgba(0, 255, 0, 0.2)',
     bottom: 0,
   },
   blackLine: {
     position: 'absolute',
     width: '100%',
-    height: 2, // Thicker black line
-    backgroundColor: 'black', // Solid black color
-    bottom: '75%', // Positioned at the 75% mark
+    height: 2,
+    backgroundColor: 'black',
+    bottom: '75%',
   },
   calendarTitle: {
     fontSize: 22,
