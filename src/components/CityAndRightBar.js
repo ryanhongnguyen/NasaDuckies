@@ -1,24 +1,32 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { colors } from "../../assets/themes/colors";
 
 export default function CityAndRightBar({ city, isSatellite, setIsSatellite, handleRecenter }) {
+
+  const currentHour = new Date().getHours();
+  
+  const isDaytime = currentHour >= 6 && currentHour < 18;
+
   return (
     <>
       <View style={styles.cityContainer}>
         <View style={styles.circleContainer}>
-          <Image 
-            source={{ uri: 'https://i.postimg.cc/RZctxc7f/shelter-chile-unhcr-web.jpg' }} 
-            style={styles.circleImage} 
+          <Ionicons 
+            name={isDaytime ? 'sunny' : 'moon'}
+            size={30}
+            color="#FFD700"
+            style={styles.icon}
           />
         </View>
-        <View style={styles.textContainer} >
+        <View style={styles.textContainer}>
           <Text style={styles.cityText}>{city}</Text>
         </View>
       </View>
 
       <View style={styles.barContainer}>
-        <TouchableOpacity onPress={handleRecenter}>
+        <TouchableOpacity>
           <View style={styles.circleContainerVertical}>
             <Image 
               source={{ uri: 'https://i.postimg.cc/RFpH5K01/Heat-Map-Icon.png' }} 
