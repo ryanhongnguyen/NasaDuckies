@@ -1,39 +1,22 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { View, StyleSheet, Pressable, Text, Button } from "react-native";
-import { supabase } from '../utils/hooks/supabase'; // Import the Supabase client
+import { View, StyleSheet, Pressable, Button } from "react-native";
+import { supabase } from '../utils/hooks/supabase';
 
 // Screens
 import MapScreen from "../screens/MapScreen";
-import CameraScreen from "../screens/CameraScreen";
-import StoriesScreen from "../screens/MapScreen";
-import SpotlightScreen from "../screens/SpotlightScreen";
-import ChatScreen from "../screens/ChatScreen";
+import CommunityScreen from "../screens/CommunityScreen";
+import ProfileScreen from "../screens/ProfileScreen";
+import WaterScreen from "../screens/WaterScreen";
 
 // Stacks
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
-import {
-  CameraOutline,
-  LensSearchFill,
-  ChatOutline,
-  ChatFill,
-  GroupOutline,
-  GroupFill,
-  MapPinOutline,
-  MapPinFill,
-  PlayOutline,
-  PlayFill,
-} from "../../assets/snapchat/NavigationIcons";
-import { colors } from "../../assets/themes/colors";
 import Ionicons from "react-native-vector-icons/Ionicons";
-
 
 const Tab = createBottomTabNavigator();
 
 export default function UserStack({ route, navigation }) {
-
   const handleSignOut = async () => {
     try {
       const { error } = await supabase.auth.signOut();
@@ -57,52 +40,27 @@ export default function UserStack({ route, navigation }) {
   return (
     <Tab.Navigator
       tabBar={(props) => <CustomTabBar {...props} />}
-      activeColor="#f0edf6"
-      inactiveColor="#3e2465"
-      barStyle={{ backgroundColor: "black" }}
-      initialRouteName="Camera"
+      initialRouteName="Map"
+      screenOptions={{ headerShown: false }} // Move headerShown option here to apply it to all screens
     >
-      <Tab.Screen
-        name="Map"
-        component={MapScreen}
-        options={{ ...screenOptions, headerShown: false }}
-      />
-      <Tab.Screen
-        name="Chat"
-        component={ChatScreen}
-        options={{ ...screenOptions, headerShown: false }}
-      />
-      <Tab.Screen
-        name="Camera"
-        component={CameraScreen}
-        options={{ ...screenOptions, headerShown: false }}
-      />
-      <Tab.Screen
-        name="Stories"
-        component={StoriesScreen}
-        options={{ ...screenOptions, headerShown: false }}
-      />
-      <Tab.Screen
-        name="Spotlight"
-        component={SpotlightScreen}
-        options={screenOptions}
-      />
+      <Tab.Screen name="Map" component={MapScreen} />
+      <Tab.Screen name="Water" component={WaterScreen} />
+      <Tab.Screen name="Community" component={CommunityScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 }
 
-const getTabIcon = (routeName, focused) => {
+const getTabIcon = (routeName) => {
   switch (routeName) {
     case "Map":
-      return focused ? <MapPinFill /> : <MapPinOutline />;
-    case "Chat":
-      return focused ? <ChatFill /> : <ChatOutline />;
-    case "Camera":
-      return focused ? <LensSearchFill /> : <CameraOutline />;
-    case "Stories":
-      return focused ? <GroupFill /> : <GroupOutline />;
-    case "Spotlight":
-      return focused ? <PlayFill /> : <PlayOutline />;
+      return <Ionicons name="map" size={24} color="black" />;
+    case "Water":
+      return <Ionicons name="water-outline" size={24} color="black" />;
+    case "Community":
+      return <Ionicons name="people-circle-outline" size={24} color="black" />;
+    case "Profile":
+      return <Ionicons name="person-outline" size={24} color="black" />;
     default:
       return null;
   }
@@ -117,8 +75,6 @@ const CustomTabBar = (props) => {
       <View style={styles.grayRectangle}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
-          const label = options.tabBarLabel || options.title || route.name;
-
           const isActive = state.index === index;
           const tabStyle = isActive ? styles.activeTab : styles.inactiveTab;
 
@@ -128,7 +84,7 @@ const CustomTabBar = (props) => {
               style={[styles.tab, tabStyle]}
               onPress={() => navigation.navigate(route.name)}
             >
-              {getTabIcon(route.name, isActive)}
+              {getTabIcon(route.name)}
             </Pressable>
           );
         })}
@@ -145,7 +101,7 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     padding: 0,
     bottom: 0,
-    borderTopColor: colors.belowPage, 
+    borderTopColor: "#ccc", // Adjust the color as needed
     borderTopWidth: 0.8,
   },
   grayRectangle: {

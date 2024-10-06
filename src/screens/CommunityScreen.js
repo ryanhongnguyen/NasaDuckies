@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function CameraScreen() {
+export default function CommunityScreen() {
   return (
     <View style={styles.container}>
-      <Text>Hello World from CameraScreen!</Text>
+      <Text>Hello World from CommunityScreenScreen!</Text>
     </View>
   );
 }

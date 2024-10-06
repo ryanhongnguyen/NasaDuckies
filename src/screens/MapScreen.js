@@ -170,16 +170,6 @@ export default function MapScreen() {
 
         <CityAndRightBar city={city} isSatellite={isSatellite} setIsSatellite={setIsSatellite} handleRecenter={handleRecenter} />
 
-        <View style={styles.mapFooter}>
-          <View style={styles.locationContainer}>
-            <TouchableOpacity
-              style={styles.userLocation}
-              onPress={handleRecenter}
-            >
-              <Ionicons name="navigate" size={15} color="black" />
-            </TouchableOpacity>
-          </View>
-        </View>
       </View>
     </BottomSheetModalProvider>
   );
