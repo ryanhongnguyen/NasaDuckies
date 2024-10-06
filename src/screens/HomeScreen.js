@@ -7,7 +7,7 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.homeIcon}>
         <Image
           style={styles.ghostLogo}
-          source={require("../../assets/snapchat/ghostlogo.png")}
+          source={require("../../assets/themes/plant.png")}
         />
       </View>
       <View style={styles.homeButtons}>
@@ -17,7 +17,7 @@ export default function HomeScreen({ navigation }) {
             navigation.navigate("Login");
           }}
         >
-          <Text style={styles.buttonText}>LOG IN</Text>
+          <Text style={styles.buttonText}>Log In</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button, styles.signUp]}
@@ -25,7 +25,7 @@ export default function HomeScreen({ navigation }) {
             navigation.navigate("SignUp");
           }}
         >
-          <Text style={styles.buttonText}>SIGN UP</Text>
+          <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -34,43 +34,42 @@ export default function HomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   homeScreen: {
-    backgroundColor: "#fdfc02",
+    backgroundColor: "#f7f8fa", // Softer, neutral background color
     height: "100%",
     width: "100%",
+    justifyContent: "center", // Center content vertically
     alignItems: "center",
   },
   homeIcon: {
-    width: "100%",
-    heigh: 80,
-    position: "absolute",
-    top: 200,
-    alignItems: "center"
+    marginBottom: 50, // More space below the logo
+    alignItems: "center",
   },
   ghostLogo: {
-    width: 80,
-    height: 80,
+    width: 100, // Slightly bigger for better visibility
+    height: 100,
+    tintColor: "#333", // Make the logo monochromatic to align with minimal design
   },
   homeButtons: {
-    width: "100%",
-    height: 165,
-    position: "absolute",
-    bottom: 0,
+    width: "80%", // Slightly reduce the button width to allow more breathing room
+    alignItems: "center",
   },
   button: {
     alignItems: "center",
-    padding: 25,
+    paddingVertical: 15, // Reduced padding for a cleaner, less bulky look
+    borderRadius: 10, // Rounded corners for modern design
+    marginVertical: 10, // More spacing between buttons
     width: "100%",
   },
   buttonText: {
-    color: "#FFF",
-    fontSize: 28,
-    fontWeight: "600",
-    letterSpacing: 4,
+    color: "#fff",
+    fontSize: 18, // Reduced font size for a more minimalistic feel
+    fontWeight: "500", // Slightly lighter font weight
+    letterSpacing: 2, // Reduced letter spacing for a cleaner look
   },
   logIn: {
-    backgroundColor: "#f13a56",
+    backgroundColor: "#333", // Neutral dark color for a sleek look
   },
   signUp: {
-    backgroundColor: "#11aeff",
+    backgroundColor: "#007AFF", // Use a bold but classic color for contrast
   },
 });
