@@ -6,7 +6,7 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.homeScreen}>
       <View style={styles.homeIcon}>
         <Image
-          style={styles.ghostLogo}
+          style={styles.plantLogo}
           source={require("../../assets/plant.png")}
         />
       </View>
@@ -44,10 +44,9 @@ const styles = StyleSheet.create({
     marginBottom: 50, // More space below the logo
     alignItems: "center",
   },
-  ghostLogo: {
-    width: 100, // Slightly bigger for better visibility
+  plantLogo: {
+    width: 100,
     height: 100,
-    tintColor: "#333", // Make the logo monochromatic to align with minimal design
   },
   homeButtons: {
     width: "80%", // Slightly reduce the button width to allow more breathing room

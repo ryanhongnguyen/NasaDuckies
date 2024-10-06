@@ -83,6 +83,10 @@ return (
    <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
      <Text style={styles.saveButtonText}>Save & Continue</Text>
    </TouchableOpacity>
+   <View></View>
+   <View></View>
+   <View></View>
+   <View></View>
  </ScrollView>
  </SafeAreaView>
 );
