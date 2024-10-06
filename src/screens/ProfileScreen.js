@@ -2,30 +2,15 @@ import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 
 const ProfileScreen = () => {
-  const [activeTab, setActiveTab] = useState('Favourites');  // Default active tab
+  const [activeTab, setActiveTab] = useState('My Crops');  // Default active tab
 
   const renderGridContent = () => {
     switch (activeTab) {
-      case 'Posts':
-        return (
-          <View style={styles.favoritesGrid}>
-            <Text style={styles.gridText}>No Posts yet!</Text>
-          </View>
-        );
       case 'My Crops':
         return (
           <View style={styles.favoritesGrid}>
-            <Image source={{ uri: 'https://images.everydayhealth.com/images/diet-nutrition/corn-101-a-complete-guide-1440x810.jpg' }} style={styles.favoriteItem} />
-            <Image source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Vehn%C3%A4pelto_6.jpg' }} style={styles.favoriteItem} />
-          </View>
-        );
-      case 'Favourites':
-        return (
-          <View style={styles.favoritesGrid}>
-            <Image source={{ uri: 'https://via.placeholder.com/100' }} style={styles.favoriteItem} />
-            <Image source={{ uri: 'https://via.placeholder.com/100' }} style={styles.favoriteItem} />
-            <Image source={{ uri: 'https://via.placeholder.com/100' }} style={styles.favoriteItem} />
-            <Image source={{ uri: 'https://via.placeholder.com/100' }} style={styles.favoriteItem} />
+            <Image source={require("../../assets/profile1.jpg")} style={styles.favoriteItem} />
+            <Image source={require("../../assets/profile2.jpg")} style={styles.favoriteItem} />
           </View>
         );
       case 'Friends':
@@ -53,12 +38,6 @@ const ProfileScreen = () => {
       <View style={styles.tabs}>
         <TouchableOpacity onPress={() => setActiveTab('My Crops')}>
           <Text style={activeTab === 'My Crops' ? styles.activeTabText : styles.tabText}>My Crops</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setActiveTab('Posts')}>
-          <Text style={activeTab === 'Posts' ? styles.activeTabText : styles.tabText}>Posts</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setActiveTab('Favourites')}>
-          <Text style={activeTab === 'Favourites' ? styles.activeTabText : styles.tabText}>Favourites</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setActiveTab('Friends')}>
           <Text style={activeTab === 'Friends' ? styles.activeTabText : styles.tabText}>Friends</Text>
