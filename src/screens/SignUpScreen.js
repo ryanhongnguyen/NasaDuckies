@@ -1,6 +1,6 @@
 import { Text, View, TextInput, StyleSheet, TouchableOpacity, Linking } from "react-native";
 import { useState } from "react";
-import {supabase} from '../utils/hooks/supabase';
+import { supabase } from '../utils/hooks/supabase';
 
 // Components
 import ReturnButton from "../components/ReturnButton";
@@ -11,17 +11,22 @@ export default function SignupScreen({ navigation }) {
   const [alreadyInUseButton, setAlreadyInUseButton] = useState(false);
   const [alreadyInUseMessage, setAlreadyInUseMessage] = useState('');
 
-
-  //major dubbing here to figure out why auth doesnt work
   async function handleSubmit() {
     console.log("handle submit invoked!!");
-  
+
     try {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          data: {
+            // Add more metadata if needed
+            // first_name: 'John',
+            // last_name: 'Doe',
+          },
+        },
       });
-  
+
       if (error) {
         console.error("Error signing up:", error.message);
         if (error.message.includes("User already registered")) {
@@ -32,13 +37,32 @@ export default function SignupScreen({ navigation }) {
         }
       } else {
         console.log("User signed up:", data);
-        // Navigate to a different screen or handle successful signup
+        // After successful signup, insert into the profiles table
+        await insertUserProfile(data.user);
       }
     } catch (error) {
       console.error("Unexpected error:", error);
     }
   }
-  
+
+  const insertUserProfile = async (user) => {
+    const { data, error } = await supabase
+      .from('profiles')
+      .insert([
+        {
+          id: user.id, // Assuming 'id' is the primary key for profiles
+          email: user.email || email, // User's email, fallback to state variable
+          surveyCompleted: false,
+        },
+      ]);
+
+    if (error) {
+      console.error('Error inserting user profile:', error);
+    } else {
+      console.log('User profile inserted:', data);
+      // Optionally navigate to a different screen here
+    }
+  };
 
   return (
     <View style={styles.signUpScreen}>
@@ -51,14 +75,14 @@ export default function SignupScreen({ navigation }) {
           style={styles.inputField}
           secureTextEntry={false}
           autoCapitalize="none"
-          onChangeText={(email) => setEmail(email)}
+          onChangeText={setEmail} // Directly set email state
         />
         <Text style={styles.inputText}>PASSWORD</Text>
         <TextInput
           style={styles.inputField}
           secureTextEntry={true}
           autoCapitalize="none"
-          onChangeText={(password) => setPassword(password)}
+          onChangeText={setPassword} // Directly set password state
         />
         <Text style={styles.disclaimerText}>
           By tapping Sign Up & Accept, you acknowledge that you have read the{" "}
@@ -78,11 +102,11 @@ export default function SignupScreen({ navigation }) {
           </TouchableOpacity>
         </Text>
       </View>
-        {password.length >= 4 && (
+      {password.length >= 4 && (
         <TouchableOpacity style={styles.signUpButton} onPress={handleSubmit}>
           <Text style={styles.signUpText}>{"Sign Up & Accept"}</Text>
         </TouchableOpacity>
-        )}
+      )}
     </View>
   );
 }
