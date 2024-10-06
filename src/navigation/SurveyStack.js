@@ -1,27 +1,38 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ScrollView } from 'react-native';
 
 // Get screen dimensions
 const screenWidth = Dimensions.get('window').width;
 
 const CombinedSurvey = ({ navigation }) => {
   const [farmerName, setFarmerName] = useState('');
-  const [cropType, setCropType] = useState('');
+  const [selectedCrops, setSelectedCrops] = useState([]); // Now an array for multiple choice
   const [experience, setExperience] = useState('');
 
-    // Progress bar calculation (33% for each field completed)
-    const progressPercentage = 
-    [farmerName, cropType, experience].filter(Boolean).length * 33 + '%';
+  // Progress bar calculation (33% for each section completed)
+  const progressPercentage =
+    [farmerName, selectedCrops.length > 0, experience].filter(Boolean).length * 33 + '%';
 
   const handleSave = () => {
     console.log('Farmer Name:', farmerName);
-    console.log('Crop Type:', cropType);
+    console.log('Selected Crops:', selectedCrops);
     console.log('Experience Level:', experience);
     navigation.navigate('NextSurveyScreen');
   };
 
+  // Function to handle selection/unselection of crops
+  const toggleCropSelection = (crop) => {
+    if (selectedCrops.includes(crop)) {
+      // Unselect the crop if it's already selected
+      setSelectedCrops(selectedCrops.filter((item) => item !== crop));
+    } else {
+      // Select the crop if it's not selected
+      setSelectedCrops([...selectedCrops, crop]);
+    }
+  };
+
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Farmer Profile</Text>
 
       {/* Progress Bar */}
@@ -39,27 +50,17 @@ const CombinedSurvey = ({ navigation }) => {
       />
 
       {/* Crop Survey Section */}
-      <Text style={styles.question}>What crop do you grow?</Text>
-      <TouchableOpacity
-        style={[styles.optionButton, cropType === 'Wheat' ? styles.selectedButton : null]}
-        onPress={() => setCropType('Wheat')}
-      >
-        <Text style={styles.optionText}>Wheat</Text>
-      </TouchableOpacity>
+      <Text style={styles.question}>What crops do you grow? (Select multiple)</Text>
 
-      <TouchableOpacity
-        style={[styles.optionButton, cropType === 'Corn' ? styles.selectedButton : null]}
-        onPress={() => setCropType('Corn')}
-      >
-        <Text style={styles.optionText}>Corn</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={[styles.optionButton, cropType === 'Soy' ? styles.selectedButton : null]}
-        onPress={() => setCropType('Soy')}
-      >
-        <Text style={styles.optionText}>Soy</Text>
-      </TouchableOpacity>
+      {['Wheat', 'Corn', 'Soy'].map((crop) => (
+        <TouchableOpacity
+          key={crop}
+          style={[styles.optionButton, selectedCrops.includes(crop) ? styles.selectedButton : null]}
+          onPress={() => toggleCropSelection(crop)}
+        >
+          <Text style={styles.optionText}>{crop}</Text>
+        </TouchableOpacity>
+      ))}
 
       {/* Farming Experience Section */}
       <Text style={styles.question}>What is your farming experience level?</Text>
@@ -89,20 +90,14 @@ const CombinedSurvey = ({ navigation }) => {
       <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
         <Text style={styles.saveButtonText}>Save & Continue</Text>
       </TouchableOpacity>
-
-      <Text>Debugger for Farmer Name: {farmerName}</Text>
-      <Text>Debugger for Crop Type: {cropType}</Text>
-      <Text>Debugger for Experience: {experience}</Text>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     padding: 20,
+    alignItems: 'center',
     backgroundColor: '#fff',
   },
   title: {
