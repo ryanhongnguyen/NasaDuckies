@@ -54,13 +54,13 @@ export default function UserStack({ route, navigation }) {
 const getTabIcon = (routeName) => {
   switch (routeName) {
     case "Map":
-      return <Ionicons name="map" size={24} color="black" />;
+      return <Ionicons name="map" size={24} color="green" />;
     case "Water":
-      return <Ionicons name="water-outline" size={24} color="black" />;
+      return <Ionicons name="water-outline" size={24} color="green" />;
     case "Community":
-      return <Ionicons name="people-circle-outline" size={24} color="black" />;
+      return <Ionicons name="people-circle-outline" size={24} color="green" />;
     case "Profile":
-      return <Ionicons name="person-outline" size={24} color="black" />;
+      return <Ionicons name="person-outline" size={24} color="green" />;
     default:
       return null;
   }

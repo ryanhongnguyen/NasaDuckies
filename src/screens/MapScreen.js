@@ -161,7 +161,7 @@ export default function MapScreen() {
           {neighborMarkers.map((marker, index) => (
             <Marker key={`neighbor-${index}`} coordinate={marker}>
               <Image
-                source={require("../../assets/pineapple.png")}
+                source={require("../../assets/wheat.png")}
                 style={{ width: 50, height: 50 }}
               />
             </Marker>
