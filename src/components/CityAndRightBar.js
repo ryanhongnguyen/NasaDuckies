@@ -26,10 +26,10 @@ export default function CityAndRightBar({ city, isSatellite, setIsSatellite, han
       </View>
 
       <View style={styles.barContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress= {handleRecenter}>
           <View style={styles.circleContainerVertical}>
             <Image 
-              source={{ uri: 'https://i.postimg.cc/RFpH5K01/Heat-Map-Icon.png' }} 
+              source={require("../../assets/recenter.png")}
               style={styles.circleImage} 
             />
           </View>
@@ -37,7 +37,7 @@ export default function CityAndRightBar({ city, isSatellite, setIsSatellite, han
         <TouchableOpacity onPress={() => {isSatellite ? setIsSatellite(false) : setIsSatellite(true)}}>
           <View style={styles.circleContainerVertical}>
             <Image 
-              source={{ uri: 'https://i.postimg.cc/q7LKw9V5/Satellite-Icon.png' }} 
+              source={require("../../assets/satelline.png")}
               style={styles.circleImage} 
             />
           </View>
@@ -45,8 +45,8 @@ export default function CityAndRightBar({ city, isSatellite, setIsSatellite, han
         <TouchableOpacity>
           <View style={styles.circleContainerVertical}>
             <Image 
-              source={{ uri: 'https://i.postimg.cc/ZR5dMVJK/Memories-Icon.png' }} 
-              style={styles.circleImage} 
+              source={require("../../assets/plant.png")}
+              style={styles.circleImage}
             />
           </View>
         </TouchableOpacity>
@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         resizeMode: 'cover',
+        backgroundColor: "a7e3f3",
       },
       textContainer: {
         flex: 1,
