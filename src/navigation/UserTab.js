@@ -43,10 +43,10 @@ export default function UserStack({ route, navigation }) {
       initialRouteName="Map"
       screenOptions={{ headerShown: false }} // Move headerShown option here to apply it to all screens
     >
-      <Tab.Screen name="Map" component={MapScreen} />
-      <Tab.Screen name="Water" component={WaterScreen} />
-      <Tab.Screen name="Community" component={CommunityScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Map" component={MapScreen} options={{ ...screenOptions, headerShown: false }}/>
+      <Tab.Screen name="Water" component={WaterScreen} options={{ ...screenOptions, headerShown: false }}/>
+      <Tab.Screen name="Community" component={CommunityScreen} options={{ ...screenOptions, headerShown: false }}/>
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{ ...screenOptions, headerShown: true }}/>
     </Tab.Navigator>
   );
 }

@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import MapView, { Marker } from "react-native-maps";
-import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as Location from "expo-location";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import axios from "axios";
 import Constants from 'expo-constants';
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import CityAndRightBar from '../components/CityAndRightBar';
+import { colors } from "../../assets/themes/colors";
 
 const apiKey = Constants.expoConfig.extra.GOOGLE_PLACES_API_KEY;
 
@@ -22,6 +22,9 @@ export default function MapScreen() {
   const [isSatellite, setIsSatellite] = useState(false);
   const [farmMarkers, setFarmMarkers] = useState([]);
   const [neighborMarkers, setNeighborMarkers] = useState([]);
+  
+  // State for countdown
+  const [countdown, setCountdown] = useState(12 * 24 * 60 * 60); // 12 days in seconds
 
   useEffect(() => {
     const getLocation = async () => {
@@ -46,6 +49,13 @@ export default function MapScreen() {
       }
     };
     getLocation();
+
+    // Countdown timer
+    const timer = setInterval(() => {
+      setCountdown(prev => prev - 1);
+    }, 1000); // Update every second
+
+    return () => clearInterval(timer);
   }, []);
 
   const getCityName = async (latitude, longitude) => {
@@ -70,7 +80,6 @@ export default function MapScreen() {
       mapRef.current.animateToRegion(currentRegion, 1000);
     }
   };
-
 
   const populateFarmMarkers = (latitude, longitude) => {
     const markers = [];
@@ -104,6 +113,15 @@ export default function MapScreen() {
     }
 
     setNeighborMarkers(markers);
+  };
+
+  // Convert seconds to days, hours, minutes, and seconds
+  const formatTimeRemaining = (seconds) => {
+    const days = Math.floor(seconds / (24 * 60 * 60));
+    const hours = Math.floor((seconds % (24 * 60 * 60)) / (60 * 60));
+    const minutes = Math.floor((seconds % (60 * 60)) / 60);
+    const secs = seconds % 60;
+    return `${days}d ${hours}h ${minutes}m ${secs}s`;
   };
 
   return (
@@ -170,6 +188,19 @@ export default function MapScreen() {
 
         <CityAndRightBar city={city} isSatellite={isSatellite} setIsSatellite={setIsSatellite} handleRecenter={handleRecenter} />
 
+        {/* Footer Section */}
+        <View style={styles.mapFooter}>
+          <TouchableOpacity style={styles.bucketButton} onPress={() => { /* Handle button press here */ }}>
+            <Image source={require("../../assets/bucket.png")} style={styles.bucketImage} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.bucketButton} onPress={() => { /* Handle button press here */ }}>
+            <Image source={require("../../assets/pesticide.png")} style={styles.bucketImage} />
+          </TouchableOpacity>
+          <View style={styles.countdownContainer}>
+            <Text style={styles.countdownLabel}>Countdown to harvest:</Text>
+            <Text style={styles.countdownText}>{formatTimeRemaining(countdown)}</Text>
+          </View>
+        </View>
       </View>
     </BottomSheetModalProvider>
   );
@@ -188,16 +219,41 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 100,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    padding: 10,
-  },
-  locationContainer: {
+    backgroundColor: colors.lighttransparent,
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
+    paddingLeft: 30,
+    paddingRight: 15,
   },
-  userLocation: {
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 10,
+  bucketButton: {
+    backgroundColor: '#f0f0f0',
+    borderRadius: 50,
+    padding: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 70,
+    height: 70,
   },
+  bucketImage: {
+    width: 50,
+    height: 50,
+  },
+  countdownContainer: {
+    width: 200,
+    alignItems: 'flex-end',
+  },
+  countdownText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'right',
+  },
+  countdownLabel: {
+    fontSize: 16,
+    color: 'yellow',
+    textAlign: 'right',
+    marginBottom: 5,
+  },
+  
 });
