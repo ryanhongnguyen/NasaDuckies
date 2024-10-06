@@ -21,8 +21,8 @@ No Drip is designed with farmers in mind, ensuring simplicity, ease of use, and 
 ## 📊 Data-Driven Decisions
 By leveraging NASA data, No Drip offers tailored recommendations that empower farmers to make smarter, more informed decisions, ultimately increasing productivity and sustainability.
 
-## 🛠️ Next Steps:
-📄 ER Diagram: 
+
+## 🧐 Our App At A Glance : 
 
 <img width="1047" alt="Screenshot 2024-10-06 at 1 50 12 PM" src="https://github.com/user-attachments/assets/ee5e4f2b-1f1a-4d17-aaf5-d69692ecbf3d">
 
