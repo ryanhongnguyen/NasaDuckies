@@ -7,7 +7,7 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.homeIcon}>
         <Image
           style={styles.ghostLogo}
-          source={require("../../assets/themes/plant.png")}
+          source={require("../../assets/plant.png")}
         />
       </View>
       <View style={styles.homeButtons}>
