@@ -90,16 +90,12 @@ export default function SignupScreen({ navigation }) {
             styles={styles.blueText}
             onPress={() =>
               Linking.openURL(
-                "https://values.snap.com/privacy/privacy-policy#:~:text=We%20may%20collect%20information%20about%20you%20from%20other%20users%2C%20our,how%20you%20use%20that%20service."
+                "https://www.nasa.gov/privacy/#:~:text=The%20information%20you%20provide%20on,the%20Freedom%20of%20Information%20Act"
               )
             }
           >
             <Text style={styles.blueText}>Privacy Policy</Text>
           </TouchableOpacity>{" "}
-          and agree to the{" "}
-          <TouchableOpacity onPress={() => Linking.openURL("https://snap.com/en-US/terms")}>
-            <Text style={styles.blueText}>Terms of Service</Text>
-          </TouchableOpacity>
         </Text>
       </View>
       {password.length >= 4 && (
@@ -147,6 +143,7 @@ const styles = StyleSheet.create({
   disclaimerText: {
     top: 135,
     fontSize: 12,
+    textAlign: "center",
   },
   blueText: {
     color: "#2B83B3",
