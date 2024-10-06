@@ -2,8 +2,7 @@
 No Drip empowers farmers by providing real-time insights on water and nutrient needs, tailored specifically to their farms. Our app guides actionable agricultural decisions while fostering a knowledge-sharing community. Together, we can "grow more, with less," ensuring that not a single drop of water goes to waste. 🌍
 
 ## 🚀 App Key Features
-💦 Water Use Recommendations
-Receive customized, real-time water insights for each crop. Our app also automates watering systems based on real-time conditions, taking the guesswork out of farming.
+💦 Water Use Recommendations receive customized, real-time water insights for each crop. Our app also automates watering systems based on real-time conditions, taking the guesswork out of farming.
 
 ## 🌍 Community Insights
 Stay informed about the impact of climate change on agriculture and gain expert advice from fellow farmers and industry professionals through shared insights.
