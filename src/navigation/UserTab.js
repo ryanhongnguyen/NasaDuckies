@@ -85,7 +85,7 @@ export default function UserStack({ route, navigation }) {
       <Tab.Screen
         name="Spotlight"
         component={SpotlightScreen}
-        options={{screenOptions, headerShown: false}}
+        options={screenOptions}
       />
     </Tab.Navigator>
   );
