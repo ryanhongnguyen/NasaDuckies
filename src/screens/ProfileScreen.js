@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 
 const ProfileScreen = () => {
   const [activeTab, setActiveTab] = useState('Favourites');  // Default active tab
@@ -40,6 +40,7 @@ const ProfileScreen = () => {
   };
 
   return (
+    <SafeAreaView>
     <ScrollView contentContainerStyle={styles.container}>
       {/* Profile Section */}
       <View style={styles.profileSection}>
@@ -67,6 +68,7 @@ const ProfileScreen = () => {
       {/* Grid Content */}
       {renderGridContent()}
     </ScrollView>
+    </SafeAreaView>
   );
 };
 

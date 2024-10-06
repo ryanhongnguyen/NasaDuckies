@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, ScrollView, SafeAreaView } from 'react-native';
 
 // Get screen dimensions
 const screenWidth = Dimensions.get('window').width;
@@ -32,6 +32,7 @@ const CombinedSurvey = ({ navigation }) => {
   };
 
   return (
+    <SafeAreaView>
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Farmer Profile</Text>
 
@@ -91,6 +92,7 @@ const CombinedSurvey = ({ navigation }) => {
         <Text style={styles.saveButtonText}>Save & Continue</Text>
       </TouchableOpacity>
     </ScrollView>
+    </SafeAreaView>
   );
 };
 
