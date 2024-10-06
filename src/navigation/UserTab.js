@@ -5,9 +5,9 @@ import { View, StyleSheet, Pressable, Text, Button } from "react-native";
 import { supabase } from '../utils/hooks/supabase'; // Import the Supabase client
 
 // Screens
-import MapScreen from "../screens/MapScreen";
+// import MapScreen from "../screens/MapScreen";
 import CameraScreen from "../screens/CameraScreen";
-import StoriesScreen from "../screens/MapScreen";
+// import StoriesScreen from "../screens/MapScreen";
 import SpotlightScreen from "../screens/SpotlightScreen";
 import ChatScreen from "../screens/ChatScreen";
 
@@ -62,11 +62,11 @@ export default function UserStack({ route, navigation }) {
       barStyle={{ backgroundColor: "black" }}
       initialRouteName="Camera"
     >
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Map"
         component={MapScreen}
         options={{ ...screenOptions, headerShown: false }}
-      />
+      /> */}
       <Tab.Screen
         name="Chat"
         component={ChatScreen}
