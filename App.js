@@ -11,10 +11,8 @@ import { SafeAreaFrameContext } from "react-native-safe-area-context";
 export default function App() {
   return (
     <SafeAreaProvider>
-      {/* <RootNavigation /> */}
-      
-      {/* <FarmerProfile /> */}
-      <SurveyStackNavigator />
+      <RootNavigation>
+      </RootNavigation>
     </SafeAreaProvider>
   );
 }
