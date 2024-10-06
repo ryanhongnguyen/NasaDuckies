@@ -2,6 +2,7 @@ import React from "react";
 import { useAuthentication } from "../utils/hooks/useAuthentication";
 import AuthStack from "./AuthStack";
 import UserStack from "./UserStack";
+import SurveyScreen from '../screens/SurveyScreen';
 import supabase from '../utils/hooks/supabase';
 
 export default function RootNavigation() {

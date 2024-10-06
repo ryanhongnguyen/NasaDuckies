@@ -7,6 +7,7 @@ import SearchScreen from "../screens/SearchScreen";
 const Stack = createStackNavigator();
 
 export default function () {
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
