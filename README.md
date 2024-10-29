@@ -1,5 +1,5 @@
 # 🌱 No Drip: Empowering Smarter Farming Decisions 💧
-No Drip empowers farmers by providing real-time insights on water and nutrient needs, tailored specifically to their farms. Our app guides actionable agricultural decisions while fostering a knowledge-sharing community. Together, we can "grow more, with less," ensuring that not a single drop of water goes to waste. 🌍
+No Drip empowers farmers by providing **real-time insights** on water and nutrient needs, tailored specifically to their farms. Our app guides **actionable agricultural decisions** while fostering a knowledge-sharing community. Together, we can "**grow more, with less**," ensuring that not a single drop of water goes to waste. 🌍
 
 Our app - "No Drip" empowers farmers with real-time insights on water and nutrient needs tailored to their farm, guiding actionable agriculture decisions while fostering knowledge sharing within the agriculture community. Let's all "grow more, with less", ensuring no drip of water is wasted! App Key Features:
 
