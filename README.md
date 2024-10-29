@@ -44,7 +44,6 @@ By leveraging NASA’s powerful datasets, No Drip provides real-time, tailored r
 ## 🎥 Video Demo  
 [Watch our demo on YouTube](https://youtu.be/yD4HX84UgjQ)
 
----
 
 ## 📚 References  
 
