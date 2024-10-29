@@ -31,7 +31,6 @@ By leveraging NASA’s powerful datasets, No Drip provides real-time, tailored r
 - [MODIS Web](https://modis.gsfc.nasa.gov/data/dataprod/mod16.php)  
 - [SMAP Data Products](https://smap.jpl.nasa.gov/data/)  
 - [VIIRS Data Products](https://www.earthdata.nasa.gov/learn/find-data/near-real-time/viirs)
-- 
 
 ## 🧐 System Design At A Glance  
 
