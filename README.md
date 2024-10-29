@@ -7,13 +7,7 @@ Our app - "No Drip" empowers farmers with real-time insights on water and nutrie
 Innovative solutions that empower farmers to leverage data-driven insights from trusted resources—including NASA Earth data—are needed to tackle challenges related specifically to water. Farming and agronomy are already full-time jobs; a means for the agricultural community to take advantage of the free Earth observation data NASA offers without needing to become data scientists could reap tremendous benefits.
 
 # Current irrigation practices
-Every year, the US uses an estimated 322 billion gallons of water daily for agricultural uses (1)
--> Small changes can have huge long term effects
-
-Farmers still use inefficient methods to irrigate crops 
--> over saturating the plants
--> water from precipitation is ignored
-
+The U.S. uses approximately 322 billion gallons of water daily for agriculture, yet many farmers rely on inefficient irrigation methods that lead to over-saturation and ignore natural precipitation—small changes in water management can result in significant long-term savings.
 
 
 # 🚀 App Key Features 
